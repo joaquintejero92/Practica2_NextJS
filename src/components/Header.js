@@ -1,69 +1,55 @@
 import Link from "next/link";
-import ThemeSelect from "./ThemeSelect";
+import { FaMicrochip, FaMemory, FaDesktop, FaHdd, FaKeyboard } from "react-icons/fa";
 
-function Header() {
-    return (
+export default function Navbar() {
+  return (
+    <div className="navbar bg-base-100 shadow-md px-6">
+      {/* Izquierda */}
+      <div className="navbar-start">
+        <Link href="/" className="text-xl font-bold flex items-center gap-2">
+          <FaDesktop className="text-primary text-2xl" />
+          TIENDA INFORMÁTICA
+        </Link>
+      </div>
 
-        <div className="navbar bg-base-500 shadow-sm">
+      {/* Centro */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 text-base">
+          <li>
+            <Link href="/cpu" className="flex items-center gap-2">
+              <FaMicrochip /> CPU
+            </Link>
+          </li>
+          <li>
+            <Link href="/placa-base" className="flex items-center gap-2">
+              <FaHdd /> Placa Base
+            </Link>
+          </li>
+          <li>
+            <Link href="/tarjeta-grafica" className="flex items-center gap-2">
+              <FaDesktop /> Tarjeta Gráfica
+            </Link>
+          </li>
+          <li>
+            <Link href="/ram" className="flex items-center gap-2">
+              <FaMemory /> Memoria RAM
+            </Link>
+          </li>
+          <li>
+            <Link href="/perifericos" className="flex items-center gap-2">
+              <FaKeyboard /> Periféricos
+            </Link>
+          </li>
+        </ul>
+      </div>
 
-            <div className="flex-1">
-                <Link href="/" className="btn btn-ghost text-xl">Inicio</Link>
-                <ThemeSelect />
-            </div>
-            <div className="flex-none pr-20">
-                <ul className="menu menu-horizontal px-1">
-                    <li>
-                        <Link href="/pagina1">Página 1</Link>
-                    </li>
-                    <li>
-                        <Link href="/pagina2">Página 2</Link>
-                    </li>
-
-
-                    <li>
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button">Otras páginas</div>
-                            <ul
-                                tabIndex={0}
-                                className="menu dropdown-content bg-base-200 rounded-box z-1 mt-4 w-52 p-2 shadow-sm">
-                                <li>
-                                    <Link href="/pagina3">Página 3</Link>
-                                </li>
-                                <li>
-                                    <Link href="/pagina4">Página 4</Link>
-                                </li>
-                                <li>
-                                    <Link href="/pagina5">Página 5</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-
-
-                    <div className="drawer">
-                        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content fixed top-0 right-0 z-10">
-                            {/* Page content here */}
-                            <label htmlFor="my-drawer" className=" btn btn-primary drawer-button size-15 rounded-full">Drawer</label>
-                        </div>
-                        <div className="drawer-side z-10">
-                            <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                                {/* Sidebar content here */}
-                                <li><Link href="/pagina1">Pagina 1</Link></li>
-                                <li><Link href="/pagina2">Pagina 2</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                </ul>
-            </div>
-        </div>
-
-
-    );
+      {/* Derecha */}
+      <div className="navbar-end">
+        <select className="select select-bordered w-32">
+          <option>Claro</option>
+          <option>Oscuro</option>
+        </select>
+      </div>
+    </div>
+  );
 }
-
-export default Header;
