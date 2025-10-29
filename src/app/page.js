@@ -1,94 +1,48 @@
-import Link from "next/link";
+"use client";
+import { useState } from "react";
 import AutoCarousel from "@/components/AutoCarousel";
-import CountDown from "@/components/CountDown";
-import Table from "@/components/Table";
-import SortedTable from "@/components/SortedTable";
 import RadialProgress from "@/components/RadialProgress";
+import FeaturedProducts from "@/components/FeaturedProducts";
+import Precarga from "@/components/Precarga"; 
 
+export default function HomePage() {
+  const [loading, setLoading] = useState(true);
 
-export default function Home() {
+  if (loading) return <Precarga onFinish={() => setLoading(false)} />;
+
   return (
-    <section>
+    <main className="flex flex-col items-center bg-base-100 min-h-screen">
+      {/* Carrusel arriba */}
+      <section className="w-full max-w-5xl mt-6 px-4">
+        <AutoCarousel />
+      </section>
 
-      <AutoCarousel />
+      {/* Progreso de carga */}
+      <section className="flex flex-col items-center mt-10">
+        <h1 className="text-4xl font-bold text-primary mb-6 text-center">
+          Bienvenido a InformaTech 💻
+        </h1>
+      </section>
 
+      {/* Descripción */}
+      <section className="max-w-3xl text-center mt-10 px-4 space-y-4">
+        <p className="text-lg text-base-content">
+          En <span className="font-semibold text-primary">InformaTech</span> te ofrecemos los mejores
+          componentes informáticos del mercado: procesadores, placas base, memorias RAM, tarjetas
+          gráficas, periféricos y mucho más.
+        </p>
+        <p className="text-lg text-base-content">
+          Nuestro objetivo es ayudarte a montar o mejorar tu ordenador con productos de calidad,
+          siempre con asesoramiento técnico y las mejores marcas disponibles.
+        </p>
+      </section>
 
-      <br />
-      <div className="tooltip" data-tip="hello world">
-        <p className="btn">Hover me</p>
-      </div>
-
-      <CountDown />
-      <RadialProgress />
-
-
-      {/* name of each tab group should be unique */}
-      <div className="tabs tabs-box">
-        <input type="radio" name="my_tabs" className="tab" aria-label="Tab 1" />
-        <div className="tab-content bg-base-100 border-base-300 p-6">
-          <p>Tab content 1</p>
-
-          <details className="dropdown">
-            <summary className="btn m-1">open or close</summary>
-            <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-              <li><a>Item 1</a></li>
-              <li><a>Item 2</a></li>
-            </ul>
-          </details>
-        </div>
-
-        <input type="radio" name="my_tabs" className="tab" aria-label="Tab 2" />
-        <div className="tab-content bg-base-100 border-base-300 p-6">
-          <p>Tab content 2</p>
-
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn m-1">Click</div>
-            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-              <li><a>Item 1</a></li>
-              <li><a>Item 2</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <input type="radio" name="my_tabs" className="tab" aria-label="Tab 3" defaultChecked />
-        <div className="tab-content bg-base-100 border-base-300 p-6">
-          <p>Tab content 3</p>
-
-          <button className="btn btn-neutral">Neutral</button>
-          <button className="btn btn-primary">Primary</button>
-          <button className="btn btn-secondary">Secondary</button>
-          <button className="btn btn-accent">Accent</button>
-          <button className="btn btn-info">Info</button>
-          <button className="btn btn-success">Success</button>
-          <button className="btn btn-warning">Warning</button>
-          <button className="btn btn-error">Error</button>
-          <br />
-          <button className="btn btn-soft">Default</button>
-          <button className="btn btn-soft btn-primary">Primary</button>
-          <button className="btn btn-soft btn-secondary">Secondary</button>
-          <button className="btn btn-soft btn-accent">Accent</button>
-          <button className="btn btn-soft btn-info">Info</button>
-          <button className="btn btn-soft btn-success">Success</button>
-          <button className="btn btn-soft btn-warning">Warning</button>
-          <button className="btn btn-soft btn-error">Error</button>
-          <br />
-          <button className="btn btn-outline">Default</button>
-          <button className="btn btn-outline btn-primary">Primary</button>
-          <button className="btn btn-outline btn-secondary">Secondary</button>
-          <button className="btn btn-outline btn-accent">Accent</button>
-          <button className="btn btn-outline btn-info">Info</button>
-          <button className="btn btn-outline btn-success">Success</button>
-          <button className="btn btn-outline btn-warning">Warning</button>
-          <button className="btn btn-outline btn-error">Error</button>
-
-        </div>
-      </div>
-
-      <div className="p-10 bg-white"></div>
-
-      <SortedTable />
-      {/* <Table /> */}
-
-    </section>
+      {/* Productos destacados */}
+      <section className="w-full max-w-6xl mt-12 px-4">
+        <FeaturedProducts />
+      </section>
+    </main>
   );
 }
+
+
