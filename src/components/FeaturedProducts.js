@@ -41,7 +41,7 @@ export default function FeaturedProducts() {
           image="/productos/ssd.jpg"
         />
         <ProductCard
-          title="Fuente de Alimentación 750W Gold"
+          title="Fuente de Alimentación 750W 80+ Gold"
           desc="80+ Gold / Modular / Ventilador silencioso."
           price="99,00"
           image="/productos/fuente.jpg"

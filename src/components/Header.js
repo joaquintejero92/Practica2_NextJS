@@ -7,10 +7,32 @@ import {
   FaMemory,
   FaDesktop,
   FaHdd,
-  FaKeyboard,
+  FaShoppingCart,
 } from "react-icons/fa";
+import CartModal from "@/components/CartModal";
+import { useState, useEffect } from "react";
 
 export default function Header() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    // función para actualizar el número de productos
+    const updateCount = () => {
+      const stored = JSON.parse(localStorage.getItem("cart") || "[]");
+      const totalItems = stored.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      setCount(totalItems);
+    };
+
+    // actualizar al cargar la página
+    updateCount();
+
+    // escuchar el evento personalizado del carrito
+    window.addEventListener("cart-updated", updateCount);
+
+    // limpiar al desmontar
+    return () => window.removeEventListener("cart-updated", updateCount);
+  }, []);
+
   return (
     <div className="navbar bg-base-100 shadow-md px-8 py-3">
       {/* IZQUIERDA: Logo + texto */}
@@ -52,16 +74,11 @@ export default function Header() {
               <FaMemory className="text-primary text-xl" /> RAM
             </Link>
           </li>
-          <li>
-            <Link href="/perifericos" className="flex items-center gap-2">
-              <FaKeyboard className="text-primary text-xl" /> Periféricos
-            </Link>
-          </li>
         </ul>
       </div>
 
-      {/* DERECHA: Selector de tema */}
-      <div className="navbar-end">
+      {/* DERECHA: Selector de tema + Carrito */}
+      <div className="navbar-end flex items-center gap-6">
         <select
           data-choose-theme
           className="select select-bordered w-40 text-lg"
@@ -69,7 +86,21 @@ export default function Header() {
           <option value="light">Claro</option>
           <option value="dark">Oscuro</option>
         </select>
+
+        {/* 🛒 Icono del carrito que abre el modal */}
+          <div className="relative">
+            <label htmlFor="cart-modal" className="btn btn-ghost btn-circle cursor-pointer">
+              <FaShoppingCart className="text-3xl text-primary" />
+              {count > 0 && (
+                <span className="badge badge-primary absolute -top-1 -right-1 text-sm font-bold">
+                  {count}
+                </span>
+              )}
+            </label>
+          </div>
+
+          <CartModal />
+        </div>
       </div>
-    </div>
   );
 }

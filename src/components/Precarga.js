@@ -13,7 +13,7 @@ export default function Preloader({ onFinish }) {
           setTimeout(() => onFinish(), 500);
           return 100;
         }
-        return prev + 5; // velocidad de carga
+        return prev + 4; // velocidad de carga
       });
     }, 80);
     return () => clearInterval(interval);
