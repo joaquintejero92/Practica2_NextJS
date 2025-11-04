@@ -15,7 +15,6 @@ export default function CartModal() {
     window.addEventListener("cart-updated", updateCart);
     return () => window.removeEventListener("cart-updated", updateCart);
   }, []);
-
   const total = cart.reduce(
     (acc, item) => acc + parseFloat(item.price) * (item.quantity || 1),
     0
